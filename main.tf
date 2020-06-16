@@ -1,28 +1,30 @@
-provider "aws" {
-  version = "2.33.0"
+module "data-streamnig-kafka2bigquery" {
+  source  = "app.terraform.io/adeo-data-streaming-platform/dsp-bigquery/dsp"
 
-  region = var.aws_region
-}
+  product_name = var.product_name
+  topics       = var.topics
 
-provider "random" {
-  version = "2.2"
-}
+  cluster_name = var.cluster_name
 
-resource "random_pet" "table_name" {}
+  project = var.project
+  region  = var.region
 
-resource "aws_dynamodb_table" "tfc_example_table" {
-  name = "${var.db_table_name}-${random_pet.table_name.id}"
+  target_gcp_project = var.target_gcp_project
+  target_gcp_region  = var.target_gcp_region
 
-  read_capacity  = var.db_read_capacity
-  write_capacity = var.db_write_capacity
-  hash_key       = "UUID"
+  bigquery_role             = var.bigquery_role
+  bigquey_dataset_name      = var.bigquey_dataset_name
+  bigquery_dataset_location = var.bigquery_dataset_location
 
-  attribute {
-    name = "UUID"
-    type = "S"
-  }
+  kafka_cluster           = var.kafka_cluster
+  schema_registry_cluster = var.schema_registry_cluster
 
-  tags = {
-    user_name = var.tag_user_name
-  }
+  confluentcloud_environement_id = var.confluentcloud_environement_id
+
+  kafka_connect_topics_config     = var.kafka_connect_topics_config
+  kafka_connect_dlq_topics_config = var.kafka_connect_dlq_topics_config
+
+  kafka_connect_image = var.kafka_connect_image
+
+  workload_project_role = var.workload_project_role
 }
