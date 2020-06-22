@@ -1,4 +1,4 @@
-module "data-streamnig-kafka2bigquery" {
+module "data-streaming-bigquery" {
   source  = "app.terraform.io/adeo-data-streaming-platform/dsp-bigquery/dsp"
 
   product_name = var.product_name
