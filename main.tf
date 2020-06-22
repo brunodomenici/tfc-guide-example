@@ -1,5 +1,6 @@
 module "data-streaming-bigquery" {
   source  = "app.terraform.io/adeo-data-streaming-platform/dsp-bigquery/dsp"
+  version = "1.0.1-beta"
 
   product_name = var.product_name
   topics       = var.topics
